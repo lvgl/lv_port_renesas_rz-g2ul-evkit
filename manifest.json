@@ -1,5 +1,5 @@
 {
-    "name": "Renesas RZ/G2L-EVKIT",
+    "name": "Renesas RZ/G2UL-EVKIT",
     "maintainer": "LVGL",
     "hostOperatingsystem": [
         "Linux"
@@ -11,25 +11,24 @@
         "chipVendor": "Renesas",
         "manufacturer": "Renesas",
         "specs": {
-            "MPU": "Arm Cortex-A55 (1.2 GHz)",
-            "RAM": "2GB DDR4 SDRAM",
-            "Flash": "Micro SD card, 64GB eMMC, 64MB QSPI flash",
-            "GPU": "Arm Mali-G31 (has 3D acceleration)",
+            "MPU": "Arm Cortex-A55 (1.0 GHz)",
+            "RAM": "1GB DDR4 SDRAM",
+            "Flash": "Micro SD card, 64GB eMMC, 16MB QSPI flash",
             "Interface": "Micro-HDMI",
             "Touch Pad": "USB touch input"
         }
     },
-    "description": "The Renesas RZ/G2L is a general-purpose MPU with a Cortex-A55 (1.2 GHz) and a 3D GPU with video codecs. The RZ/G2L in this evaluation kit is on a SoM, which itself is on a carrier board. The carrier board features IO useful for MPU applications such as Micro-HDMI, 2 ethernet ports, headphone and microphone jacks, USB serial terminal, USB host, camera input, an additional Micro SD card slot, and exposed GPIO headers.",
-    "shortDescription": "Renesas RZ/G2L general-purpose SoM and carrier board with peripherals.",
-    "urlToClone": "https://github.com/lvgl/lv_port_renesas_rz-g2l-evkit.git",
+    "description": "The Renesas RZ/G2UL is a general-purpose MPU with a Cortex-A55 (1.0 GHz). This evaluation kit consists of both a SoM (System on Module) which carries the RZ/G2UL MPU, as well as a carrier board which carries the SoM. The SoM complies with the SMARC v2.1 stardard. The carrier board features IO useful for MPU applications such as a display interface (Parallel-IF) and included parallel-to-Micro-HDMI bridge, 2 ethernet ports, headphone and microphone jacks, USB serial terminal, USB host, camera input, an additional Micro SD card slot, and exposed GPIO headers.",
+    "shortDescription": "Renesas RZ/G2UL general-purpose SoM and carrier board with peripherals.",
+    "urlToClone": "https://github.com/lvgl/lv_port_renesas_rz-g2ul-evkit.git",
     "logos": [
         "https://raw.githubusercontent.com/lvgl/project-creator/master/meta/images/renesas/logo.svg"
     ],
-    "image": "https://raw.githubusercontent.com/lvgl/lv_port_renesas_rz-g2l-evkit/master/board_images/board.webp",
+    "image": "https://raw.githubusercontent.com/lvgl/lv_port_renesas_rz-g2ul-evkit/master/board_images/board.webp",
     "buy_now_links": [
-        "https://www.renesas.com/en/products/microcontrollers-microprocessors/rz-mpus/rzg2l-evkit-evaluation-board-kit-rzg2l-mpu",
-        "https://www.mouser.com/ProductDetail/Renesas-Electronics/RTK9744L23S01000BE?qs=7D1LtPJG0i2Uv%2FGoPVv6xw%3D%3D",
-        "https://www.digikey.com/en/products/detail/renesas-electronics-corporation/RTK9744L23S01000BE/15290121"
+        "https://www.renesas.com/en/products/microcontrollers-microprocessors/rz-mpus/rzg2ul-evkit-evaluation-board-kit-rzg2ul-mpu",
+        "https://www.mouser.com/ProductDetail/Renesas-Electronics/RTK9743U11S01000BE?qs=vvQtp7zwQdM9TF1mvTYlYA%3D%3D",
+        "https://www.digikey.com/en/products/detail/renesas-electronics-corporation/RTK9743U11S01000BE/18099644"
     ],
     "branches": [
         "v8.3-with-v9-benchmark"

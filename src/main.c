@@ -1,10 +1,3 @@
-/**
- * HMI SDK / RZ/G Linux LVGL sample program for image display
- *
- * Copyright (C) 2024 Renesas Electronics Corp. All rights reserved.
- */
-
-
 #include	<unistd.h>
 #include	<time.h>
 #include	<sys/time.h>
@@ -21,101 +14,44 @@
 
 #include	"lvgl/lvgl.h"
 #include	"lvgl/demos/lv_demos.h"
-#include	"lvgl/lv_drivers/wayland/wayland.h"
-
-#define		LSID_WINDOW_WIDTH		((lv_coord_t)1280)
-#define		LSID_WINDOW_HEIGHT		((lv_coord_t)720)
-
-static int32_t check_options(int argc, char *argv[], int32_t *mode)
-{
-	int option;
-	int index;
-	int32_t ret = 0;
-	const char *optstring = "f";
-	const struct option longopts[] = {
-		{"fullscreen", no_argument, NULL, 'f'},
-		{NULL, 0, NULL, 0}
-	};
-
-	while (1) {
-		option = getopt_long(argc, argv, optstring, longopts, &index);
-		if (option == -1)
-			break;
-		switch(option){
-		case 'f':
-			if (mode)
-				*mode = 1;
-			break;
-		default:
-			ret = -1;
-			break;
-		}
-	}
-	return ret;
-}
+#include	"lv_drivers/display/fbdev.h"
 
 int main(int argc, char *argv[])
 {
-	struct pollfd pfd;
-	uint32_t time_till_next;
-	int sleep;
-	lv_coord_t width = LSID_WINDOW_WIDTH;
-	lv_coord_t height = LSID_WINDOW_HEIGHT;
-	int32_t ret;
-	int32_t mode = 0;
-	lv_disp_t *disp;
-
-	ret = check_options(argc, argv, &mode);
-	if (ret < 0) {
-		return 1;
-	}
-	else if (ret > 0) {
-		return 0;
-	}
-
-	/*LittlevGL init*/
+	/*LVGL init*/
 	lv_init();
 
-	lv_wayland_init();
+	fbdev_init();
 
-	disp = lv_wayland_create_window(width, height, "Window Demo", NULL);
-	if (disp == NULL) {
-		printf("ERROR!! lv_wayland_create_window\n");
-		lv_wayland_deinit();
-		return 1;
-	}
+	/*A static or global variable to store the buffers*/
+	static lv_disp_draw_buf_t disp_buf;
 
-	if (mode)
-		lv_wayland_window_set_fullscreen(disp, true);
+	/*Static or global buffer(s). The second buffer is optional*/
+	static lv_color_t buf_1[1920 * 1080];
+	// static lv_color_t buf_2[MY_DISP_HOR_RES * 10];
 
-	pfd.fd = lv_wayland_get_fd();
-	pfd.events = POLLIN;
+	/*Initialize `disp_buf` with the buffer(s). With only one buffer use NULL instead buf_2 */
+	lv_disp_draw_buf_init(&disp_buf, buf_1, NULL, 1920 * 1080);
+	
+	static lv_disp_drv_t disp_drv;          /*A variable to hold the drivers. Must be static or global.*/
+	lv_disp_drv_init(&disp_drv);            /*Basic initialization*/
+	disp_drv.draw_buf = &disp_buf;          /*Set an initialized buffer*/
+	disp_drv.flush_cb = fbdev_flush;        /*Set a flush callback to draw to the display*/
+	uint32_t wd, ht;
+	fbdev_get_sizes(&wd, &ht, NULL);
+	disp_drv.hor_res = wd;                 /*Set the horizontal resolution in pixels*/
+	disp_drv.ver_res = ht;
+
+	lv_disp_drv_register(&disp_drv);
 
 	lv_demo_benchmark();
 
 	while(1) {
-		/* Handle any Wayland/LVGL timers/events */
-		time_till_next = lv_wayland_timer_handler();
-
-		/* Run until the last window closes */
-		if (!lv_wayland_window_is_open(NULL)) {
-			break;
-		}
-
-		/* Wait for something interesting to happen */
-		if (time_till_next == LV_NO_TIMER_READY) {
-			sleep = -1;
-		} else if (time_till_next > INT_MAX) {
-			sleep = INT_MAX;
-		} else {
-			sleep = time_till_next;
-		}
-		while ((poll(&pfd, 1, sleep) < 0) && (errno == EINTR));
+		uint32_t del = lv_timer_handler();
+		usleep(del * 1000);
 	}
 
-	lv_wayland_deinit();
-
-	return 0;
+	return 1;
 }
 
 /**
@@ -137,4 +73,3 @@ uint32_t custom_tick_get(void)
 
 	return (uint32_t)(now_ms - start_ms);
 }
-
