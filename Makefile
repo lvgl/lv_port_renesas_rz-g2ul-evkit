@@ -4,9 +4,10 @@ include $(LVGL_DIR)/$(LVGL_DIR_NAME)/lvgl.mk
 
 BIN = lvgl_demo_benchmark
 
-CFLAGS += -O3 -I. -DLV_CONF_INCLUDE_SIMPLE
+CFLAGS += -O3 -I. -I${SDKTARGETSYSROOT}/usr/include/lvgl/lv_drivers -DLV_CONF_INCLUDE_SIMPLE
 
-CSRCS += src/main.c lv_drivers/display/fbdev.c
+CSRCS += src/main.c
+LDFLAGS += -llv_drivers
 OBJS := $(patsubst %.c, %.o, $(CSRCS))
 TARGET 			= $(patsubst ./%, %, $(OBJS))
 

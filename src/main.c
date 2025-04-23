@@ -14,7 +14,9 @@
 
 #include	"lvgl/lvgl.h"
 #include	"lvgl/demos/lv_demos.h"
-#include	"lv_drivers/display/fbdev.h"
+
+/* ${SDKTARGETSYSROOT}/usr/include/lvgl/lv_drivers */
+#include	"display/fbdev.h"
 
 int main(int argc, char *argv[])
 {
