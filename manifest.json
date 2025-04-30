@@ -24,7 +24,7 @@
     "logos": [
         "https://raw.githubusercontent.com/lvgl/project-creator/master/meta/images/renesas/logo.svg"
     ],
-    "image": "https://raw.githubusercontent.com/lvgl/lv_port_renesas_rz-g2ul-evkit/master/board_images/board.webp",
+    "image": "https://raw.githubusercontent.com/lvgl/lv_port_renesas_rz-g2ul-evkit/master/board_images/renesas-RZ-G2UL-EVKIT.webp",
     "buy_now_links": [
         "https://www.renesas.com/en/products/microcontrollers-microprocessors/rz-mpus/rzg2ul-evkit-evaluation-board-kit-rzg2ul-mpu",
         "https://www.mouser.com/ProductDetail/Renesas-Electronics/RTK9743U11S01000BE?qs=vvQtp7zwQdM9TF1mvTYlYA%3D%3D",
