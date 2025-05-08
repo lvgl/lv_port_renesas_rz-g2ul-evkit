@@ -25,7 +25,7 @@ SoM-only if you are using a different carrier board or already have one.
 The benchmark was run with the v8.3 fbdev driver.
 
 <a href="https://www.youtube.com/watch?v=VnynDLR36Xc">
-    <img src="https://github.com/user-attachments/assets/c898dd69-1c3f-4937-88be-503933181776" width="75%">
+    <img src="https://github.com/user-attachments/assets/4b4dfa80-9435-414b-a199-a949b270ba36" width="75%">
 </a>
 
 | Name                      | Avg. CPU | Avg. FPS | Avg. time | render time | flush time |
