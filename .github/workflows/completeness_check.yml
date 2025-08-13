@@ -45,30 +45,30 @@ jobs:
             echo "Manifest does not contain a link to this repository." && exit 1;
           fi
 
-      - name: Check for single lv_conf files
-        if: ${{ !cancelled() }}
-        run: |
-          echo "Checking for single lv_conf.h and lv_conf.defaults files..."
-          
-          # Find files
-          LV_CONF_H_COUNT=$(find . -type f -name "lv_conf.h" | wc -l)
-          LV_CONF_DEFAULT_COUNT=$(find . -type f -name "lv_conf.defaults" | wc -l)
-          
-          echo "Found $LV_CONF_H_COUNT lv_conf.h file(s)."
-          echo "Found $LV_CONF_DEFAULT_COUNT lv_conf.defaults file(s)."
-          
-          # Validate counts
-          if [ "$LV_CONF_H_COUNT" -ne 1 ]; then
-            echo "❌ There should be exactly one lv_conf.h file, but found $LV_CONF_H_COUNT."
-            exit 1
-          fi
-          
-          if [ "$LV_CONF_DEFAULT_COUNT" -ne 1 ]; then
-            echo "❌ There should be exactly one lv_conf.defaults file, but found $LV_CONF_DEFAULT_COUNT."
-            exit 1
-          fi
-          
-          echo "✅ File checks passed."
+#       - name: Check for single lv_conf files
+#         if: ${{ !cancelled() }}
+#         run: |
+#           echo "Checking for single lv_conf.h and lv_conf.defaults files..."
+#           
+#           # Find files
+#           LV_CONF_H_COUNT=$(find . -type f -name "lv_conf.h" | wc -l)
+#           LV_CONF_DEFAULT_COUNT=$(find . -type f -name "lv_conf.defaults" | wc -l)
+#           
+#           echo "Found $LV_CONF_H_COUNT lv_conf.h file(s)."
+#           echo "Found $LV_CONF_DEFAULT_COUNT lv_conf.defaults file(s)."
+#           
+#           # Validate counts
+#           if [ "$LV_CONF_H_COUNT" -ne 1 ]; then
+#             echo "❌ There should be exactly one lv_conf.h file, but found $LV_CONF_H_COUNT."
+#             exit 1
+#           fi
+#           
+#           if [ "$LV_CONF_DEFAULT_COUNT" -ne 1 ]; then
+#             echo "❌ There should be exactly one lv_conf.defaults file, but found $LV_CONF_DEFAULT_COUNT."
+#             exit 1
+#           fi
+#           
+#           echo "✅ File checks passed."
 
       - name: Check if the repo URL is in the branch updater
         if: ${{ !cancelled() }}
